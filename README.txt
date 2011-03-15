@@ -1,64 +1,39 @@
 
-Goal: Data mine commonly available personal information.
-See how much we learn or reasonably guess.
-For example, a given name may suggest gender, maybe ethnicity, maybe age,
-maybe religion, maybe financial situation.
-Research and determine possible useful correlations.
+Pro-File
+-------------------------------------------------------------------------------
 
-We'll construct a database using publicly-available census data and other sources...
+Goal: statistical profiling of commonly-available personal information.
+For example, a given first name may suggest gender, age and cultural information
+such as ethnicity and religion. These suggestions then suggest yet more things.
 
-Retain flexibility; all answers should allow multiple pieces of data.
-No answer should be considered perfect or complete, only a best guess.
+We can't possibly know everything about someone from a name and an IP address,
+but this sort of information *can* give us a starting point for subtle
+customization of someone's online experience which can ultimately result in a
+happier customer.
 
-We should be able to take information present into account, but not require anything in particular.
+We'll construct a database using accurate publicly-available census data and
+other sources, and then, given an incomplete set of information we'll return a
+set of statistical speculations.
 
-Name (Given, Surname)
-	(Name → Psuedonym) i.e. Fake name
-	(Name → Age)
-	(Name → Ethnicity)
-	(Name → Location)
-Username
-	(Username → Name)
-	(Username → DOB)
-	(Username → Interests)
-	(Username → Membership on other sites)
-Email (Username, Domain)
-Location
-	(Location → Political affiliation)
-DOB (Day, Month, Year)
-Gender
-Ethnicity
-	(Ethnicity → Finances)
-Education
-	Level
-	Location
-Finances
-	Home Ownership
-Health
-Political affiliation
-Any written material
-	(Writing → Education level)
-	(Writing → Gender)
+In:
+	Given name
+	Family name
+	IP address
+	Email address
+	Member profile
 
-List of names
-List of countries
-List of languages
-List of ethnicities
+Out:
+	Personal characteristics:
+		Gender
+		Age
+		Location
+	Cultural:
+		Ethnicity
+		Religious affiliation
+	Society:
+		Education level
+		Political affiliation
+		Marital status
 
------------------------------------------------------------------------------
-
-API
-
-Ideally, we should be able to provide a partial profile and receive back
-a set of "clues" and percentages about this person. For example, given 
-the first name "Ryan" we should get back "there is a 90% chance this person is under 40"
-
------------------------------------------------------------------------------
-
-Sources:
-	"Profiles of General Demographic Characteristics, 2000 Census of Population and Housing, United States" U.S. Department of Commerce Donald L. Evans, Secretary
-		<URL: http://www2.census.gov/census_2000/datasets/demographic_profile/0_National_Summary/2khus.pdf>
-	http://www.ssa.gov/oact/babynames/limits.html
-		http://www.ssa.gov/oact/babynames/names.zip
-	http://www2.census.gov/census_2000/datasets/
+Requirements: python3, sqlite3
 
