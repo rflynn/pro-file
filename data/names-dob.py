@@ -5,72 +5,16 @@
 Generate HTML/png name popularity report over time by integrating statistics.
 """
 
-import math, cairo
-from itertools import dropwhile, takewhile
-
-# 
-def meanval(l):
-	return float(sum(l)) / max(1, len(l))
-
-# 
-def meani(l):
-	s = sum(l)
-	mean = float(s) / 2
-	for i in range(0, len(l)-1):
-		if l[i] >= mean:
-			return i
-		mean -= l[i]
-	return 0
-
-def variance(l):
-	m = meanval(l)
-	v = float(sum([(n-m)**2 for n in l])) / len(l)
-	return v
-
-def stddev(l):
-	return math.sqrt(variance(l))
-
-# determine the smallest range of years that totals a certain pct of the total
-def range_pct(l, pct):
-	s = float(sum(l))
-	sp = s * pct
-	lo = 0
-	hi = len(l)-1
-	curr = s
-	while lo < hi and curr > sp:
-		if l[lo] <= l[hi]:
-			if curr - l[lo] > sp:
-				lo += 1
-				curr -= l[lo]
-			else:
-				break
-		else:
-			if curr - l[hi] > sp:
-				hi -= 1
-				curr -= l[hi]
-			else:
-				break
-	return (lo, hi)
-
-# determine the most likely range of 'years', and how likely it is
-def range_years(l, years):
-	lo = 0
-	hi = len(l)-1
-	while hi - lo > years:
-		if l[lo] <= l[hi]:
-			lo += 1
-		else:
-			hi -= 1
-	total = float(sum(l))
-	if total == 0:
-		total = 1
-	rtotal = sum(l[lo:hi+1])
-	return ((lo, hi), rtotal / total * 100.)
+import cairo
+import sqlite3
+import sys
+import time
+import stats # custom
 
 # generate a barchart image file
 def graph(name, p, Width=110, Height=50, BarWidthPx=2, BarSpacePx=1):
 	try:
-		XScale=BarWidthPx + BarSpacePx
+		XScale = BarWidthPx + BarSpacePx
 		# p is [(year,fcnt)]
 		Width *= XScale
 		surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, Width, Height)
@@ -79,10 +23,10 @@ def graph(name, p, Width=110, Height=50, BarWidthPx=2, BarSpacePx=1):
 		cr.select_font_face('Verdana')
         	cr.set_font_size(8.0)
 		cnts = [cnt for year,cnt in p]
-		mi = meani(cnts)
+		mi = stats.meani(cnts)
 		mval = cnts[mi]
-		sd = stddev(cnts)
-		(mloi,mhii),pct = range_years(cnts, 30)
+		sd = stats.stddev(cnts)
+		(mloi,mhii),pct = stats.range_size(cnts, 30)
 		# graph individual years
 		for i,(year,fcnt) in enumerate(p):
 			cr.set_source_rgba(0,0,0,.3)
@@ -101,7 +45,7 @@ def graph(name, p, Width=110, Height=50, BarWidthPx=2, BarSpacePx=1):
 			cr.stroke()
 		# graph 80% 
 		cr.set_source_rgba(1,0,0,0.6)
-		mloi,mhii = range_pct(cnts, 0.80)
+		mloi,mhii = stats.range_pct(cnts, 0.80)
 		pctrng = mhii - mloi
 		cr.rectangle(mloi * XScale, Height-7, pctrng * XScale, 1)
 		cr.fill()
@@ -114,12 +58,6 @@ def graph(name, p, Width=110, Height=50, BarWidthPx=2, BarSpacePx=1):
 		sys.stderr.write("Unexpected error:%s\n" % (sys.exc_info()[0]))
 		raise
 	return (0,0)
-
-import sys
-import sqlite3
-import time 
-
-CurrentYear = time.localtime().tm_year
 
 def name_birth_totals(conn, name):
 	c = conn.cursor()
@@ -140,6 +78,7 @@ def name_birth_totals(conn, name):
 			for y in range(1900, CurrentYear+1)]
 	return fill
 
+CurrentYear = time.localtime().tm_year
 conn = sqlite3.connect('./names.db')
 
 print("<html><body>")
@@ -162,7 +101,7 @@ limit 1000
 """)
 for name,_ in c:
 	sys.stderr.write(name + ' ')
-	(pct, pctrng) = graph(name, name_birth_totals(conn, name))
+	(pct, pctrng) = graph(name, name_birth_totals(conn, name), CurrentYear-1900-1)
 	print("""
 <div style="display:inline-block">
 	<div>%s <small>(%.1f%% &plusmn;15 yr) (&plusmn;%.1f yr @ 80%%)</small></div>
