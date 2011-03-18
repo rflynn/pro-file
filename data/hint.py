@@ -314,6 +314,7 @@ HintMap = {
 	'ETH.FRISIAN':('Frisian','Frysk/Fräisk/Frasch/Fresk/Freesk/Friisk',''),
 	'ETH.CORSICAN':('Corsican','Corsu',''),
 	'ETH.BRETON':('Breton','Brezhoneg','Celtic language spoken in Brittany, France'),
+	'ETH.MANX':('Manx','','From the Isle of Man'),
 
 	# religious and/or ethnic
 	'REL.CHRISTIAN':('Christian','Christian',''),

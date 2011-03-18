@@ -22,7 +22,7 @@ GivenNames = (
 ('JESÚS','REL.CHRISTIAN',()),
 ('MARY','REL.CHRISTIAN',()),
 ('PETER',('REL.CHRISTIAN','CC.EN','CC.DE','CC.NL','REG.SCAN','CC.SI','CC.SK'),'PETE'),
-('JAMES','REL.CHRISTIAN',('JIM','JIMMY')),
+('JAMES',('REL.CHRISTIAN','CC.EN'),('JIM','JIMMY')),
 ('JOHN',('REL.CHRISTIAN','CC.EN'),('JACK','JOHNNY')),
 ('ANDREW',('REL.CHRISTIAN','CC.EN'),'DREW'),
 ('PHILIP',('REL.CHRISTIAN','CC.EN','REG.SCAN','CC.NL'),('PHIL','PHILLIP')),
@@ -63,7 +63,7 @@ GivenNames = (
 ('DANIEL',('REL.BIBLE.OLD','REL.BIBLE.NEW','CC.EN','CC.FR','CC.DE','REG.SCAN','CC.PL','CC.ES','CC.PT','CC.RO','CC.SI'),('DAN','DANNY')),
 ('PAUL',('REL.BIBLE.NEW','CC.EN','CC.FR','CC.DE','CC.NL','REG.SCAN'),()),
 ('CHRISTOPHER',('REL.BIBLE.NEW','CC.EN'),'CHRIS'),
-('EDWARD',('CC.EN','CC.PL'),('ED','EDDY')),
+('EDWARD',('CC.EN','CC.PL'),('ED','EDDIE')),
 ('HELEN','CC.EN',()),
 ('KENNETH',('CC.ST','CC.EN','REG.SCAN'),('KEN','KENNY')),
 ('MARK',('CC.EN','CC.RU','CC.NL','REG.SCAN','REL.BIBLE.NEW'),()),
@@ -300,22 +300,94 @@ GivenNames = (
 ('BERNARD',('CC.EN','CC.FR','CC.PL','CC.HR','CC.SI'),()),
 ('LEROY','CC.EN',()),
 ('CRYSTAL','CC.EN',()),
-('THEODORE','CC.EN',()),
+('THEODORE','CC.EN',('TED')),
+('JUAN','CC.ES',()),
+('AUSTIN','CC.EN',()),
+('RAY','CC.',()),
+('BRITTANY','CC.EN',()),
+('LYNN','CC.EN',()),
+('CHRISTIAN',('REL.CHRISTIAN','CC.EN','CC.FR','CC.DE','REG.SCAN'),()),
+('TIFFANY','CC.EN',()),
+('TODD','CC.EN',()),
+('GERTRUDE',('CC.EN','CC.DE','CC.NL'),()),
+('JOANNE','CC.EN',()),
+('SHEILA',('CC.IE','CC.EN'),()),
+('ANITA',('CC.ES','CC.HR','CC.FI','CC.EN'),()),
+('SALLY','CC.EN',()),
+('GAIL','CC.EN',()),
+('RODNEY','CC.EN',()),
+('BRADLEY','CC.EN',()),
+('CINDY','CC.EN',()),
+('ERIN',('CC.EN','CC.IE'),()),
+('ELSIE','CC.EN',()),
+('VIVIAN',('CC.EN','REG.SCAN'),()),
+('ELLA',('CC.EN','REG.SCAN'),()),
+('CLIFFORD','CC.EN',()),
+('ALEXIS',('CC.DE','CC.FR','CC.EN','CC.GR'),('ALEX')),
+('WENDY','CC.EN',()),
+('SHERRY','CC.EN',()),
+('SUZANNE',('CC.FR','CC.EN'),('SUZY')),
+('IDA',('CC.EN','CC.DE','REG..SCAN','CC.NL','CC.IT','CC.ES','CC.PT','CC.HU','CC.SO','CC.HR',),()),
+('TRAVIS','CC.EN',()),
+('DARLENE','CC.EN',()),
+('EILEEN',('CC.IE','CC.EN'),()),
+('NATALIE',('CC.FR','CC.EN','CC.DE'),()),
 
 ('HUCKLEBERRY','CC.US',''),
 
 )
 
+def build_names():
+	cnt = 0
+	for name,hint in SurNames:
+		#print('name=', name)
+		if type(name) != tuple:
+			name = (name,)
+		if type(hint) != tuple:
+			hint = (hint,)
+		for n in name:
+			n = names.normalize(n)
+			for h in hint:
+				cnt += 1
+				if n in SurnameDict:
+					SurnameDict[n].append(h)
+				else:
+					SurnameDict[n] = [h]
+				#print('%s:%s' % (n,h)),
+	print('name/hint=',cnt)
+
+GivenNameDict = {}
+
+def build_names():
+	cnt = 0
+	for name,hints,nicknames in GivenNames:
+		if type(name) != tuple:
+			name = (name,)
+		for n in name:
+			n = names.normalize(n)
+			if type(hints) != tuple:
+				hints = (hints,)
+			for h in hints:
+				if not hint.is_hint(h):
+					print(name,h," is not a hint")
+				cnt += 1
+				if n in GivenNameDict:
+					GivenNameDict[n].append(h)
+				else:
+					GivenNameDict[n] = [h]
+			# unique-ify
+			GivenNameDict[n] = list(dict([(x,None) for x in GivenNameDict[n]]).keys())
+	print('GivenName name/hint=',cnt)
+
+build_names()
+
+def classify(name):
+	norm = names.normalize(name)
+	try:
+		return GivenNameDict[norm]
+	except KeyError:
+		return None
+
 if __name__ == '__main__':
-	for names,hints,nicknames in GivenNames:
-		if type(names) != tuple:
-			names = (names,)
-		for name in names:
-			pass
-			#print(name,),
-		if type(hints) != tuple:
-			hints = (hints,)
-		for h in hints:
-			if not hint.is_hint(h):
-				print(name,h," is not a hint")
+	pass
 
