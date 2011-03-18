@@ -2,21 +2,12 @@
 SQLITE = sqlite3
 DB = names.db
 
-db: population life_table surname givenname report
-
-population:
+db:
 	./population-us.py | $(SQLITE) $(DB)
-
-life_table:
 	./life-table-us.py | $(SQLITE) $(DB)
-
-surname:
 	./surname-us.py | $(SQLITE) $(DB)
-
-givenname:
 	./givenname-birthyear-us.py | $(SQLITE) $(DB)
-
-report:
+	./surname-ethnicity-us.py
 	./names-dob.py > names-dob.html
 
 clean:
