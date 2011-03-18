@@ -304,8 +304,15 @@ HintMap = {
 	'REG.HISPANIA':('Hispanic','Hispanic','Iberian peninsular origin'),
 
 	# ethnic groups
+	# the following groups are identifed by the Census
+	'ETH.WHITE':('White','White','Caucasian. Unspecified non-Africa, non-East Asian origin'),
+	'ETH.BLACK':('Black','Black','Unspecified African origin'),
+	'ETH.HISPANIC':('Hispanic','',''),
+	'ETH.API':('Asian/Pacific Islander','',''),
+	'ETH.MIXED':('','',''),
+	# others
 	'ETH.ARAB':('Arab','بلع',''),
-	'ETH.BLACK':('Black','Black',''),
+	'ETH.ASIAN':('Asian','Asian','Unspecified East Asian origin'),
 	'ETH.KOREAN':('Korean','한국인/조선인',''),
 	'ETH.CATALAN':('Catalan','Catalan',''),
 	'ETH.GALICIAN':('Galician','Galegos',''),
