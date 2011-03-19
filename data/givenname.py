@@ -66,27 +66,30 @@ def birthspan_pct(conn, name, pct=80, cc='US'):
 	ylo,yhi = stats.range_pct(cnts, pct / 100.)
 	return (ylo+1900, yhi+1900)
 
-import sys
 import names
 import givenname_origin
 
-def test():
-	with sqlite3.connect('./names.db') as conn:
-		for name in sys.argv[1:] + 'Non-existent Ruth James Robin Ryan Britney Tyler Austin'.split(' '):
-			norm = names.normalize(name)
-			g = gender(conn, norm)
-			pct, span = 70, 20
-			plo,phi = birthspan_pct(conn, norm, pct)
-			(slo,shi),spct = birthspan(conn, norm, span)
- 			hints = givenname_origin.classify(norm)
-			print('%-15s %3.0f%%%s %2.0f%%@%.0fyr=%d-%d %.0f%%=%d-%d %s' % \
-				(name,
-				 max(g.values())*100.,
-				 'F' if g['F'] >= g['M'] else 'M', 
-				 spct, span, slo, shi,
-				 pct, plo, phi,
-				hints))
+def lookup(conn, givennames):
+	for name in givennames:
+		norm = names.normalize(name)
+		g = gender(conn, norm)
+		pct, span = 70, 20
+		plo,phi = birthspan_pct(conn, norm, pct)
+		(slo,shi),spct = birthspan(conn, norm, span)
+ 		hints = givenname_origin.classify(norm)
+		print('%-15s %3.0f%%%s %2.0f%%@%.0fyr=%d-%d %.0f%%=%d-%d %s' % \
+			(name, max(g.values())*100.,
+		 	'F' if g['F'] >= g['M'] else 'M', 
+		 	spct, span, slo, shi, pct, plo, phi, hints))
+
+def test(conn):
+	lookup(conn, 'Non-existent Ruth James Robin Ryan Britney Tyler Austin'.split(' '))
 
 if __name__ == '__main__':
-	test()
+	import sys
+	with sqlite3.connect('./names.db') as conn:
+		if sys.argv[1:] != []:
+			lookup(conn, sys.argv[1:])
+		else:
+			test(conn)
 

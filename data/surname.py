@@ -6,7 +6,6 @@ Surname reporting.  Consolidate surname database table data.
 """
 
 import sqlite3
-import names
 
 def ethnicity(conn, name, cc='us'):
 	c = conn.cursor()
@@ -32,16 +31,23 @@ def origin(conn, name):
 	c.close()
 	return hints
 
-import sys
+import names
 
-def test():
-	with sqlite3.connect('./names.db') as conn:
-		for name in sys.argv[1:] + 'Non-existent Smith Nguyen Washington'.split(' '):
-			norm = names.normalize(name)
-			e = ethnicity(conn, norm)
-			o = origin(conn, norm)
-			print('%-15s %5.2f%% %-6s %s' % (name,e[1],e[0],' '.join(o)))
+def lookup(conn, surnames):
+	for name in surnames:
+		norm = names.normalize(name)
+		e = ethnicity(conn, norm)
+		o = origin(conn, norm)
+		print('%-15s %5.2f%% %-6s %s' % (name,e[1],e[0],' '.join(o)))
+
+def test(conn):
+	lookup(conn, 'Non-existent Smith Nguyen Washington'.split(' '))
 
 if __name__ == '__main__':
-	test()
+	import sys
+	with sqlite3.connect('./names.db') as conn:
+		if sys.argv[1:] != []:
+			lookup(conn, sys.argv[1:])
+		else:
+			test(conn)
 
