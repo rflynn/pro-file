@@ -7,6 +7,7 @@ map given/first name to hints
 
 import hint
 import names
+import itertools
 
 GivenNames = (
 
@@ -303,7 +304,7 @@ GivenNames = (
 ('THEODORE','CC.EN',('TED')),
 ('JUAN','CC.ES',()),
 ('AUSTIN','CC.EN',()),
-('RAY','CC.',()),
+('RAY','CC.EN',()),
 ('BRITTANY','CC.EN',()),
 ('LYNN','CC.EN',()),
 ('CHRISTIAN',('REL.CHRISTIAN','CC.EN','CC.FR','CC.DE','REG.SCAN'),()),
@@ -327,7 +328,7 @@ GivenNames = (
 ('WENDY','CC.EN',()),
 ('SHERRY','CC.EN',()),
 ('SUZANNE',('CC.FR','CC.EN'),('SUZY')),
-('IDA',('CC.EN','CC.DE','REG..SCAN','CC.NL','CC.IT','CC.ES','CC.PT','CC.HU','CC.SO','CC.HR',),()),
+('IDA',('CC.EN','CC.DE','REG.SCAN','CC.NL','CC.IT','CC.ES','CC.PT','CC.HU','CC.SO','CC.HR',),()),
 ('TRAVIS','CC.EN',()),
 ('DARLENE','CC.EN',()),
 ('EILEEN',('CC.IE','CC.EN'),()),
@@ -335,59 +336,147 @@ GivenNames = (
 
 ('HUCKLEBERRY','CC.US',''),
 
+('HUCKLEBERRY','CC.US',''),
+
+# Top 20 'Whitest' and 'Blackest' Names
+# http://abcnews.go.com.nyud.net/2020/story?id=2470131
+# "Whitest" white names
+('Molly','ETH.WHITE',''),
+('Amy','ETH.WHITE',''),
+('Claire','ETH.WHITE',''),
+('Emily','ETH.WHITE',''),
+('Katie','ETH.WHITE',''),
+('Madeline','ETH.WHITE',''),
+('Katelyn','ETH.WHITE',''),
+('Emma','ETH.WHITE',''),
+('Abigail','ETH.WHITE',''),
+('Carly','ETH.WHITE',''),
+('Jenna','ETH.WHITE',''),
+('Heather','ETH.WHITE',''),
+('Katherine','ETH.WHITE',''),
+('Caitlin','ETH.WHITE',''),
+('Kaitlin','ETH.WHITE',''),
+('Holly','ETH.WHITE',''),
+('Allison','ETH.WHITE',''),
+('Kaitlyn','ETH.WHITE',''),
+('Hannah','ETH.WHITE',''),
+('Kathryn','ETH.WHITE',''),
+# "Blackest" black girl names
+('Imani','ETH.BLACK',''),
+('Ebony','ETH.BLACK',''),
+('Shanice','ETH.BLACK',''),
+('Aaliyah','ETH.BLACK',''),
+('Precious','ETH.BLACK',''),
+('Nia','ETH.BLACK',''),
+('Deja','ETH.BLACK',''),
+('Diamond','ETH.BLACK',''),
+('Asia','ETH.BLACK',''),
+('Aliyah','ETH.BLACK',''),
+('Jada','ETH.BLACK',''),
+('Tierra','ETH.BLACK',''),
+('Tiara','ETH.BLACK',''),
+('Kiara','ETH.BLACK',''),
+('Jazmine','ETH.BLACK',''),
+('Jasmin','ETH.BLACK',''),
+('Jazmin','ETH.BLACK',''),
+('Jasmine','ETH.BLACK',''),
+('Alexus','ETH.BLACK',''),
+('Raven','ETH.BLACK',''),
+# "Whitest" boy names
+('Jake','ETH.WHITE',''),
+('Connor','ETH.WHITE',''),
+('Tanner','ETH.WHITE',''),
+('Wyatt','ETH.WHITE',''),
+('Cody','ETH.WHITE',''),
+('Dustin','ETH.WHITE',''),
+('Luke','ETH.WHITE',''),
+('Jack','ETH.WHITE',''),
+('Scott','ETH.WHITE',''),
+('Logan','ETH.WHITE',''),
+('Cole','ETH.WHITE',''),
+('Lucas','ETH.WHITE',''),
+('Bradley','ETH.WHITE',''),
+('Jacob','ETH.WHITE',''),
+('Garrett','ETH.WHITE',''),
+('Dylan','ETH.WHITE',''),
+('Maxwell','ETH.WHITE',''),
+('Hunter','ETH.WHITE',''),
+('Brett','ETH.WHITE',''),
+('Colin','ETH.WHITE',''),
+# 20 "Blackest" boy names
+('DeShawn','ETH.BLACK',''),
+('DeAndre','ETH.BLACK',''),
+('Marquis ','ETH.BLACK',''),
+('Darnell','ETH.BLACK',''),
+('Terrell','ETH.BLACK',''),
+('Malik','ETH.BLACK',''),
+('Trevon','ETH.BLACK',''),
+('Tyrone','ETH.BLACK',''),
+('Willie','ETH.BLACK',''),
+('Dominique','ETH.BLACK',''),
+('Demetrius','ETH.BLACK',''),
+('Reginald','ETH.BLACK',''),
+('Jamal','ETH.BLACK',''),
+('Maurice','ETH.BLACK',''),
+('Jalen','ETH.BLACK',''),
+('Darius','ETH.BLACK',''),
+('Xavier','ETH.BLACK',''),
+('Terrance','ETH.BLACK',''),
+('Andre','ETH.BLACK',''),
+('Darryl','ETH.BLACK',''),
+
+
 )
 
-def build_names():
-	cnt = 0
-	for name,hint in SurNames:
-		#print('name=', name)
-		if type(name) != tuple:
-			name = (name,)
-		if type(hint) != tuple:
-			hint = (hint,)
-		for n in name:
-			n = names.normalize(n)
-			for h in hint:
-				cnt += 1
-				if n in SurnameDict:
-					SurnameDict[n].append(h)
-				else:
-					SurnameDict[n] = [h]
-				#print('%s:%s' % (n,h)),
-	print('name/hint=',cnt)
-
 GivenNameDict = {}
+Nicknames = {}
 
 def build_names():
 	cnt = 0
 	for name,hints,nicknames in GivenNames:
 		if type(name) != tuple:
 			name = (name,)
+		name = tuple([names.normalize(n) for n in name])
+		if type(hints) != tuple:
+			hints = (hints,)
 		for n in name:
-			n = names.normalize(n)
-			if type(hints) != tuple:
-				hints = (hints,)
 			for h in hints:
 				if not hint.is_hint(h):
-					print(name,h," is not a hint")
-				cnt += 1
+					print(name,h,' is not a hint')
+				else:
+					cnt += 1
 				if n in GivenNameDict:
 					GivenNameDict[n].append(h)
 				else:
 					GivenNameDict[n] = [h]
-			# unique-ify
-			GivenNameDict[n] = list(dict([(x,None) for x in GivenNameDict[n]]).keys())
-	print('GivenName name/hint=',cnt)
+		if type(nicknames) != tuple:
+			nicknames = (nicknames,)
+		for nick in nicknames:
+			nick = names.normalize(nick)
+			if nick in Nicknames:
+				Nicknames[nick].append(list(name))
+			else:
+				Nicknames[nick] = list(name)
+	return cnt
 
 build_names()
 
 def classify(name):
-	norm = names.normalize(name)
-	try:
-		return GivenNameDict[norm]
-	except KeyError:
-		return None
+	name = names.normalize(name)
+	# get list of all names to look up
+	name = [name] + (Nicknames[name] if name in Nicknames else [])
+	# get list of list of hints
+	hint = [GivenNameDict[n] if n in GivenNameDict else [] for n in name]
+	# merge lists
+	hint = list(itertools.chain(*hint))
+	# unique-ify list FIXME: no good; order matters
+	#hint = list(set(hint))
+	return hint
 
 if __name__ == '__main__':
-	pass
+
+	def test():
+		assert classify('Bob') == classify('Robert')
+
+	test()
 
