@@ -65,11 +65,11 @@ def name_birth_totals(conn, name):
 	select	n.year,
 		sum(n.total * p.factor1900 * lt.prob) as fcnt
 	from givenname_birthyear n
-	join population p on p.cc = n.cc and p.year = n.year
+	join population p on p.year = n.year
        	join life_table_us lt on lt.year = n.year
-	where name=? and n.cc=?
+	where name=?
 	group by name, n.year
-	order by n.year asc""", (name,'us'))
+	order by n.year asc""", (name,))
 	rows = c.fetchall()
 	c.close()
 	d = dict(rows)
@@ -92,9 +92,8 @@ select name,
        -- p.factor1900 normalizes name popularity based on u.s. population
        -- lt.prob takes into account human life expectancy at a given age
 from givenname_birthyear n
-join population p on p.cc = n.cc and p.year = n.year
+join population p on p.year = n.year
 join life_table_us lt on lt.year = n.year
-where n.cc = 'us'
 group by name
 order by fcnt desc
 limit 1000
