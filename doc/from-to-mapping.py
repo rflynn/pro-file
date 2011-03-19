@@ -4,7 +4,7 @@
 #
 
 Fields = (
-	('IP Address', {'Town':'maybe', 'Zip':'yes', 'Country':'yes'}),
+	('IP Address', {'City':'probably', 'State':'yes', 'Zip':'yes', 'Country':'yes'}),
 	('Email', {'Given Name':'sometimes', 'Family Name':'sometimes', 'City':'sometimes', 'Hobby':'sometimes'}),
 	('Title', {'Gender':'yes', 'Marital':'maybe'}),
 	('Given Name', {'Gender':'99%', 'Age':'50-90%', 'Ethnicity':'maybe', 'Religion':'maybe', 'Country':'maybe'}),
