@@ -1,0 +1,18 @@
+*.pyc
+*.zip
+
+# generated files and reports
+doc/from-to-mapping.html
+data/names.db
+data/names-dob.html
+data/map/world-small-out.svg
+
+# superfluous data files
+data/NST_EST2009_ALLDATA.csv
+data/surname-us-dist.all.last.txt
+data/givenname-birthyear-us/
+data/name-dob-chart/
+data/popclockest.txt
+data/surname-ethnicity-us-names-2000/
+data/misc/
+
