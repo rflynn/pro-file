@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Map relationship between surname/family name and hints (as defined in hints module).
+Map relationship between surname and genealogical hints.
 Some names are very general and yield little data besides 'European', but
 others yield all sorts of things.
 
@@ -10,7 +10,7 @@ Notes:
 
 	Most Indonesians do not use family last name.
 		Javanese do not usually have family names or surnames.
-		Many have just a single name. For example, Sukarno or Suharto.
+		Many have just a single name. For example, 'Sukarno' or 'Suharto'.
 """
 
 import hint
@@ -2917,196 +2917,6 @@ SurNames = (
 ('Bao', 'CC.CN'),
 ('Wen', 'CC.CN'),
 
-# Statistically prevelant black names in the U.S.
-# Source: http://names.mongabay.com/data/black.html
-('WASHINGTON',('CC.US','ETH.BLACK')),
-('BANKS',('CC.US','ETH.BLACK')),
-('JOSEPH',('CC.US','ETH.BLACK')),
-('JEFFERSON',('CC.US','ETH.BLACK')),
-('MACK',('CC.US','ETH.BLACK')),
-('SINGLETON',('CC.US','ETH.BLACK')),
-('CHARLES',('CC.US','ETH.BLACK')),
-('MOSLEY',('CC.US','ETH.BLACK')),
-('BOOKER',('CC.US','ETH.BLACK')),
-('ALSTON',('CC.US','ETH.BLACK')),
-('ROBERSON',('CC.US','ETH.BLACK')),
-('GAINES',('CC.US','ETH.BLACK')),
-('DORSEY',('CC.US','ETH.BLACK')),
-('WARE',('CC.US','ETH.BLACK')),
-('BATTLE',('CC.US','ETH.BLACK')),
-('PIERRE',('CC.US','ETH.BLACK')),
-('RIVERS',('CC.US','ETH.BLACK')),
-('MCCRAY',('CC.US','ETH.BLACK')),
-('BRANCH',('CC.US','ETH.BLACK')),
-('BOLDEN',('CC.US','ETH.BLACK')),
-('WHITFIELD',('CC.US','ETH.BLACK')),
-('TILLMAN',('CC.US','ETH.BLACK')),
-('MCNEIL',('CC.US','ETH.BLACK')),
-('COTTON',('CC.US','ETH.BLACK')),
-('WINSTON',('CC.US','ETH.BLACK')),
-('RUFFIN',('CC.US','ETH.BLACK')),
-('HAIRSTON',('CC.US','ETH.BLACK')),
-('POLK',('CC.US','ETH.BLACK')),
-('RUCKER',('CC.US','ETH.BLACK')),
-('MUHAMMAD',('CC.US','ETH.BLACK')),
-('HEARD',('CC.US','ETH.BLACK')),
-('STARKS',('CC.US','ETH.BLACK')),
-('EPPS',('CC.US','ETH.BLACK')),
-('CHATMAN',('CC.US','ETH.BLACK')),
-('TOLBERT',('CC.US','ETH.BLACK')),
-('COVINGTON',('CC.US','ETH.BLACK')),
-('SIMMS',('CC.US','ETH.BLACK')),
-('BURKS',('CC.US','ETH.BLACK')),
-('CLEMONS',('CC.US','ETH.BLACK')),
-('SAMUEL',('CC.US','ETH.BLACK')),
-('LOUIS',('CC.US','ETH.BLACK')),
-('BURRELL',('CC.US','ETH.BLACK')),
-('WESLEY',('CC.US','ETH.BLACK')),
-('GIVENS',('CC.US','ETH.BLACK')),
-('SAMUELS',('CC.US','ETH.BLACK')),
-('DUKES',('CC.US','ETH.BLACK')),
-('MCGHEE',('CC.US','ETH.BLACK')),
-('SMALLS',('CC.US','ETH.BLACK')),
-('WILLIAM',('CC.US','ETH.BLACK')),
-('BLUE',('CC.US','ETH.BLACK')),
-('PEOPLES',('CC.US','ETH.BLACK')),
-('COLBERT',('CC.US','ETH.BLACK')),
-('PAIGE',('CC.US','ETH.BLACK')),
-('MCNEAL',('CC.US','ETH.BLACK')),
-('MCCLENDON',('CC.US','ETH.BLACK')),
-('GARY',('CC.US','ETH.BLACK')),
-('BLACKMON',('CC.US','ETH.BLACK')),
-('LOCKETT',('CC.US','ETH.BLACK')),
-('MIMS',('CC.US','ETH.BLACK')),
-('DIGGS',('CC.US','ETH.BLACK')),
-('MILTON',('CC.US','ETH.BLACK')),
-('ARRINGTON',('CC.US','ETH.BLACK')),
-('RANDLE',('CC.US','ETH.BLACK')),
-('WOODSON',('CC.US','ETH.BLACK')),
-('MYLES',('CC.US','ETH.BLACK')),
-('BLOUNT',('CC.US','ETH.BLACK')),
-('CALLOWAY',('CC.US','ETH.BLACK')),
-('JEAN',('CC.US','ETH.BLACK')),
-('HAYWOOD',('CC.US','ETH.BLACK')),
-('DAWKINS',('CC.US','ETH.BLACK')),
-('BOYKIN',('CC.US','ETH.BLACK')),
-('HARGROVE',('CC.US','ETH.BLACK')),
-('BRAXTON',('CC.US','ETH.BLACK')),
-('RICKS',('CC.US','ETH.BLACK')),
-('LYLES',('CC.US','ETH.BLACK')),
-('BELLAMY',('CC.US','ETH.BLACK')),
-('BETHEA',('CC.US','ETH.BLACK')),
-('GIPSON',('CC.US','ETH.BLACK')),
-('MCNAIR',('CC.US','ETH.BLACK')),
-('FELDER',('CC.US','ETH.BLACK')),
-('HIGHTOWER',('CC.US','ETH.BLACK')),
-('KEYS',('CC.US','ETH.BLACK')),
-('WITHERSPOON',('CC.US','ETH.BLACK')),
-('LOFTON',('CC.US','ETH.BLACK')),
-('FRANCOIS',('CC.US','ETH.BLACK')),
-('GRIER',('CC.US','ETH.BLACK')),
-('BYNUM',('CC.US','ETH.BLACK')),
-('HOOKS',('CC.US','ETH.BLACK')),
-('PARHAM',('CC.US','ETH.BLACK')),
-('DARDEN',('CC.US','ETH.BLACK')),
-('CRENSHAW',('CC.US','ETH.BLACK')),
-('ARTIS',('CC.US','ETH.BLACK')),
-('DOZIER',('CC.US','ETH.BLACK')),
-('BRUNSON',('CC.US','ETH.BLACK')),
-('MCRAE',('CC.US','ETH.BLACK')),
-('ADDISON',('CC.US','ETH.BLACK')),
-('SCALES',('CC.US','ETH.BLACK')),
-('HOLLINS',('CC.US','ETH.BLACK')),
-('DUPREE',('CC.US','ETH.BLACK')),
-('GRAYSON',('CC.US','ETH.BLACK')),
-('COLES',('CC.US','ETH.BLACK')),
-('FELTON',('CC.US','ETH.BLACK')),
-('SINGLETARY',('CC.US','ETH.BLACK')),
-('ISAAC',('CC.US','ETH.BLACK')),
-('BOWENS',('CC.US','ETH.BLACK')),
-('GANT',('CC.US','ETH.BLACK')),
-('ASKEW',('CC.US','ETH.BLACK')),
-('ECHOLS',('CC.US','ETH.BLACK')),
-('GOODEN',('CC.US','ETH.BLACK')),
-('STALLWORTH',('CC.US','ETH.BLACK')),
-('JETER',('CC.US','ETH.BLACK')),
-('GUILLORY',('CC.US','ETH.BLACK')),
-('MCCLOUD',('CC.US','ETH.BLACK')),
-('BOSTON',('CC.US','ETH.BLACK')),
-('MCMILLIAN',('CC.US','ETH.BLACK')),
-('SEALS',('CC.US','ETH.BLACK')),
-('SPANN',('CC.US','ETH.BLACK')),
-('COLEY',('CC.US','ETH.BLACK')),
-('BONDS',('CC.US','ETH.BLACK')),
-('FAISON',('CC.US','ETH.BLACK')),
-('ROYAL',('CC.US','ETH.BLACK')),
-('CARRINGTON',('CC.US','ETH.BLACK')),
-('EDMOND',('CC.US','ETH.BLACK')),
-('DUBOSE',('CC.US','ETH.BLACK')),
-('MCKOY',('CC.US','ETH.BLACK')),
-('IRVING',('CC.US','ETH.BLACK')),
-('ARMSTEAD',('CC.US','ETH.BLACK')),
-('TOLLIVER',('CC.US','ETH.BLACK')),
-('DRAYTON',('CC.US','ETH.BLACK')),
-('DENSON',('CC.US','ETH.BLACK')),
-('CHAVIS',('CC.US','ETH.BLACK')),
-('REDD',('CC.US','ETH.BLACK')),
-('BOWIE',('CC.US','ETH.BLACK')),
-('ANTOINE',('CC.US','ETH.BLACK')),
-('RIDDICK',('CC.US','ETH.BLACK')),
-('BATISTE',('CC.US','ETH.BLACK')),
-('KIMBROUGH',('CC.US','ETH.BLACK')),
-('LITTLEJOHN',('CC.US','ETH.BLACK')),
-('MCDUFFIE',('CC.US','ETH.BLACK')),
-('RAGLAND',('CC.US','ETH.BLACK')),
-('BARKSDALE',('CC.US','ETH.BLACK')),
-('BEVERLY',('CC.US','ETH.BLACK')),
-('BELTON',('CC.US','ETH.BLACK')),
-('BAPTISTE',('CC.US','ETH.BLACK')),
-('BRINSON',('CC.US','ETH.BLACK')),
-('PINKNEY',('CC.US','ETH.BLACK')),
-('PRESSLEY',('CC.US','ETH.BLACK')),
-('IVORY',('CC.US','ETH.BLACK')),
-('COOKS',('CC.US','ETH.BLACK')),
-('TOLIVER',('CC.US','ETH.BLACK')),
-('BRICE',('CC.US','ETH.BLACK')),
-('ARCHIE',('CC.US','ETH.BLACK')),
-('LIPSCOMB',('CC.US','ETH.BLACK')),
-('MCLAURIN',('CC.US','ETH.BLACK')),
-('DONALD',('CC.US','ETH.BLACK')),
-('PRINGLE',('CC.US','ETH.BLACK')),
-('LOMAX',('CC.US','ETH.BLACK')),
-('BUFORD',('CC.US','ETH.BLACK')),
-('PURNELL',('CC.US','ETH.BLACK')),
-('REDDICK',('CC.US','ETH.BLACK')),
-('IRBY',('CC.US','ETH.BLACK')),
-('QUARLES',('CC.US','ETH.BLACK')),
-('HOPSON',('CC.US','ETH.BLACK')),
-('ROYSTER',('CC.US','ETH.BLACK')),
-('RIGGINS',('CC.US','ETH.BLACK')),
-('SHORTER',('CC.US','ETH.BLACK')),
-('ASHFORD',('CC.US','ETH.BLACK')),
-('WORTHY',('CC.US','ETH.BLACK')),
-('RIDLEY',('CC.US','ETH.BLACK')),
-('CANTY',('CC.US','ETH.BLACK')),
-('MOSBY',('CC.US','ETH.BLACK')),
-('RAWLS',('CC.US','ETH.BLACK')),
-('POINDEXTER',('CC.US','ETH.BLACK')),
-('TARVER',('CC.US','ETH.BLACK')),
-('BRUMFIELD',('CC.US','ETH.BLACK')),
-('OUTLAW',('CC.US','ETH.BLACK')),
-('COSBY',('CC.US','ETH.BLACK')),
-('COBBS',('CC.US','ETH.BLACK')),
-('GADSON',('CC.US','ETH.BLACK')),
-('LAMAR',('CC.US','ETH.BLACK')),
-('PINCKNEY',('CC.US','ETH.BLACK')),
-('MICKENS',('CC.US','ETH.BLACK')),
-('BOSTIC',('CC.US','ETH.BLACK')),
-('ETIENNE',('CC.US','ETH.BLACK')),
-('MCCANTS',('CC.US','ETH.BLACK')),
-('ROUNDTREE',('CC.US','ETH.BLACK')),
-('MURRELL',('CC.US','ETH.BLACK')),
-
 )
 
 SurnameDict = {}
@@ -3130,7 +2940,7 @@ def build_names():
 				else:
 					SurnameDict[n] = [h]
 				#print('%s:%s' % (n,h)),
-	print('name/hint=',cnt)
+	return cnt
 
 import re
 
@@ -3215,20 +3025,6 @@ import sys
 
 def fetch_names():
 	names = [(x,) for x in sys.argv[1:]]
-	"""
-	import sqlite3
-	conn = sqlite3.connect('./names.db')
-	c = conn.cursor()
-	c.execute("
-	select name \
-	from surname \
-	where cc=? and pop_fact_us >= 0.01 \
-	order by pop_fact_us desc, name asc", ('us',))
-	names = c.fetchall()
-	c.close()
-	conn.close()
-	"""
-	# hmmm we need a fuzzy match to allow "agarwal" -> "agrawal"
 	names += [
 		('Lee',),
 		('Smith',),
@@ -3248,26 +3044,59 @@ def sanity():
 
 # unique all items in a list
 def uniq(l):
-	return list(dict([(x,None) for x in l]).keys())
+	return list(set(l))
+
+build_names()
 
 if __name__ == '__main__':
-	build_names()
-	sanity()
-	cnt = 0
-	for (name,) in fetch_names():
-		e = ethnicity(name)
-		if not e:
-			print("('%s','')," % (name))
-		else:
-			cnt += 1
-			print("%s -> %s" % (name, ','.join(uniq(e))))
-	print('cnt=%d' % (cnt))
 
-	keys = list(SurnameDict.keys())
-	keys.sort()
-	for name in keys:
-		hints = SurnameDict[name]
-		hints.sort()
-		for hint in hints:
-			print("INSERT INTO surname VALUES('%s','%s')" % (name,hint))
+	import sqlite3
+
+	def test():
+		sanity()
+		cnt = 0
+		err = False
+		for (name,) in fetch_names():
+			e = ethnicity(name)
+			if not e:
+				print("('%s','')," % (name))
+				err = True
+			else:
+				cnt += 1
+				print("%s -> %s" % (name, ','.join(uniq(e))))
+		print('cnt=%d' % (cnt))
+		return not err
+
+	def create_table(conn):
+		c = conn.cursor()
+		c.executescript("""
+		DROP TABLE IF EXISTS surname_origin;
+		CREATE TABLE surname_origin (
+			name TEXT NOT NULL,
+			hint TEXT NOT NULL
+		);
+		CREATE INDEX idx_surname_origin_name ON surname_origin(name);
+		""")
+		c.close()
+
+	# TODO: really we should have a master surnames table and use
+	# foreign keys to reduce size and speed us up
+	def insert_surnames(conn):
+		create_table(conn)
+		c = conn.cursor()
+		c.execute('BEGIN')
+		cnt = 0
+		for name,hs in SurnameDict.items():
+			for h in hs:
+				#print('(name=%s)(n=%s)(hs=%s)(h=%s)' % (name,n,hs,h))
+				c.execute('INSERT INTO surname_origin VALUES(?,?)', (name,h))
+				cnt += 1
+		#c.execute('COMMIT') # hmm why doesn't this work?
+		c.close()
+		return cnt
+
+	assert test()
+	with sqlite3.connect('./names.db') as conn:
+		cnt = insert_surnames(conn)
+		print('imported', cnt, 'surname/origin records')
 
