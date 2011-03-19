@@ -6,11 +6,6 @@ Download, extract, parse and import U.S. Census data on
 the ethnicity of common surnames
 """
 
-# http://www.census.gov/genealogy/www/data/2000surnames/names.zip
-# download
-# extract to surname-ethnicity-names/
-# parse surname-ethnicity-names/app_c.csv
-
 import os, sys
 import sqlite3
 
