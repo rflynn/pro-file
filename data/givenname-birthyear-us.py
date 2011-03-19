@@ -37,23 +37,35 @@ print("""
 DROP TABLE IF EXISTS givenname_birthyear;
 CREATE TABLE givenname_birthyear (
 	year int not null,
-	cc text not null,
 	name text not null,
 	gender text not null,
 	total int not null
 );
-CREATE INDEX idx_name ON givenname_birthyear (name,cc);
-BEGIN TRANSACTION;
+
+PRAGMA synchronous = OFF;
+PRAGMA temp_store = MEMORY;
+PRAGMA journal_mode = OFF;
+PRAGMA count_changes = OFF;
+
+BEGIN DEFERRED TRANSACTION;
 """)
 
 import glob, re
+import names
 files = glob.glob('./' + dir + '/yob*.txt')
 for filename in files:
 	year = re.search('yob(\d+)\.txt', filename).group(1)
 	print('-- ' + year)
-	for line in open(filename, 'r').readlines():
-		(name,gender,total) = line.strip().split(",")
-		print("INSERT OR IGNORE INTO givenname_birthyear VALUES" +
-			"(%s,'us','%s','%s',%s);" % (year, name, gender, total))
-print('COMMIT;')
+	if int(year) >= 1900:
+		for line in open(filename, 'r').readlines():
+			(name,gender,total) = line.strip().split(",")
+			norm = names.normalize(name)
+			print("INSERT INTO givenname_birthyear VALUES" +
+				"(%s,'%s','%s',%s);" % (year, norm, gender, total))
+print("""
+COMMIT;
+CREATE INDEX idx_name ON givenname_birthyear (name);
+PRAGMA synchronous = DEFAULT;
+PRAGMA temp_store = NORMAL;
+""")
 

@@ -80,7 +80,7 @@ def parse(conn, csvfilename):
 			(d['name'], d['eth'], d['ethpct'], d['count'],
 			 d['pctwhite'], d['pctblack'], d['pctapi'], d['pctaian'], d['pct2prace'], d['pcthispanic']))
 		cnt += 1
-	c.execute('COMMIT')
+	#c.execute('COMMIT')
 	c.close()
 	return cnt
 
