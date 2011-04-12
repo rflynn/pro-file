@@ -1,5 +1,4 @@
 
-
 Pro-File
 -------------------------------------------------------------------------------
 
@@ -22,7 +21,10 @@ Requirements:
 
 Use:
 
-	Currently a collection of non-integrated libraries with script front-ends.
+	make
+
+	This will download data files and use them to generate a local database.
+	It may take a few minutes; resulting db should be ~100MB.
 
 	in data/
 		./givenname.py "my first name"
