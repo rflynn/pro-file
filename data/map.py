@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+small script to highlight countries in svg map by CC 
+"""
+
 import xml.etree.ElementTree as ET
 
 def fill(infile, outfile, paths):
