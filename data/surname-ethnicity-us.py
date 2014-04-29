@@ -23,7 +23,7 @@ def download(url, filename):
 				(min(100, float(a * b) / c * 100), c)), end='')
 			sys.stdout.flush()
 		print(('-- %s ->  %s' % (url, filename)))
-		urllib.urlretrieve(url, filename, reporthook)
+		urllib.request.urlretrieve(url, filename, reporthook)
 	# TODO: check success of urlretrieve
 	return True
 
