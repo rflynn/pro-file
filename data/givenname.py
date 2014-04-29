@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # FIXME: given names need to be case-normalized(!)
@@ -22,7 +22,7 @@ def gender(conn, name, cc='US'):
 		""", (name,))
 	g = dict(list(c.fetchall()))
 	total = float(sum(list(g.values())))
-	g2 = dict([(k, g[k]/total) for k in g.keys()])
+	g2 = dict([(k, g[k]/total) for k in list(g.keys()]))
 	# ensure both common genders present
 	for k in ('F','M'):
 		if not k in g2:

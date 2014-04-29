@@ -442,7 +442,7 @@ def build_names():
 		for n in name:
 			for h in hints:
 				if not hint.is_hint(h):
-					print(name,h,' is not a hint')
+					print((name,h,' is not a hint'))
 				else:
 					cnt += 1
 				if n in GivenNameDict:

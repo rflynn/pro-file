@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -40,7 +40,7 @@ def lookup(conn, surnames):
 			norm = names.normalize(subname)
 			e = ethnicity(conn, norm)
 			o = origin(conn, norm)
-			print('%-15s %5.2f%% %-6s %s' % (subname,e[1],e[0],' '.join(o)))
+			print(('%-15s %5.2f%% %-6s %s' % (subname,e[1],e[0],' '.join(o))))
 
 def test(conn):
 	lookup(conn, 'Non-existent Smith Nguyen Washington Johnson-Johnsson Smithford'.split(' '))

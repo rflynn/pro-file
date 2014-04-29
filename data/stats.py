@@ -71,7 +71,7 @@ if __name__ == '__main__':
 		for expres,param in Expect:
 			res = range_pct(*param)
 			if expres != res:
-				print('range_pct',param,' expected:',expres,'got:',res)
+				print(('range_pct',param,' expected:',expres,'got:',res))
 
 	def test_range_size():
 		Expect = (
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 		for expres,param in Expect:
 			res = range_size(*param)
 			if expres != res:
-				print('range_size',param,' expected:',expres,'got:',res)
+				print(('range_size',param,' expected:',expres,'got:',res))
 
 	def test():
 		test_range_size()

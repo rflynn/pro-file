@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # # -*- coding: utf-8 -*-
 
 """
@@ -46,7 +46,7 @@ for year in range(1900, CurrentYear+1):
 	ago = CurrentYear - year
 	ago = min(len(LT2006)-1, ago)
 	prob = LT2006[ago]
-	print('INSERT INTO life_table_us VALUES (%d, %.5f);' % (year, prob))
+	print(('INSERT INTO life_table_us VALUES (%d, %.5f);' % (year, prob)))
 
 print('COMMIT;')
 

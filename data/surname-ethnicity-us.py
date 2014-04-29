@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -15,14 +15,14 @@ import sqlite3
 def download(url, filename):
 	if os.path.exists(filename):
 		# TODO: add checksumming
-		print('-- %s exists' % (filename))
+		print(('-- %s exists' % (filename)))
 	else:
-		import urllib
+		import urllib.request, urllib.parse, urllib.error
 		def reporthook(a,b,c): 
-    			print("% 3.1f%% of %d bytes\r" % \
-				(min(100, float(a * b) / c * 100), c)),
-    			sys.stdout.flush()
-		print('-- %s ->  %s' % (url, filename))
+			print(("% 3.1f%% of %d bytes\r" % \
+				(min(100, float(a * b) / c * 100), c)), end='')
+			sys.stdout.flush()
+		print(('-- %s ->  %s' % (url, filename)))
 		urllib.urlretrieve(url, filename, reporthook)
 	# TODO: check success of urlretrieve
 	return True
@@ -60,17 +60,17 @@ def parse(conn, csvfilename):
 		except:
 			return 0.0
 	import csv
-	rd = csv.reader(open(csvfilename, 'rb'))
+	rd = csv.reader(open(csvfilename, 'r'))
 	# hmmm python csv reader doesn't handle field title lines?
-	rd.next() # discard header line
+	next(rd) # discard header line
 	fields = ['name','rank','count','prop100k','cum_prop100k','pctwhite','pctblack','pctapi','pctaian','pct2prace','pcthispanic']
 	create_table(conn)
 	c = conn.cursor()
 	c.execute('BEGIN TRANSACTION')
 	cnt = 0
 	for r in rd:
-		row = [r[0], int(r[1]), int(r[2])] + map(float_or_s, r[3:])
-		d = dict(zip(fields,row))
+		row = [r[0], int(r[1]), int(r[2])] + list(map(float_or_s, r[3:]))
+		d = dict(list(zip(fields,row)))
 		# calculate most likely ethnicity
 		e = [(k,d[k]) for k in fields[5:]]
 		d['eth'],d['ethpct'] = max(e,key=lambda x:x[1])
@@ -96,5 +96,5 @@ if __name__ == '__main__':
 
 	with sqlite3.connect('./names.db') as conn:
 		cnt = parse(conn, CsvFilename)
-		print('imported', cnt, 'surname/ethnicity records')
+		print(('imported', cnt, 'surname/ethnicity records'))
 

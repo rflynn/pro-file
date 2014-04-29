@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -23,7 +23,7 @@ def fill(infile, outfile, paths):
 	tree.write(outfile)
 
 def highlight_countries(ccs, rgb='#000', infile='map/world-small.svg', outfile='map/world-small-out.svg'):
-	fill(infile, outfile, dict(zip(ccs, [rgb] * len(ccs))))
+	fill(infile, outfile, dict(list(zip(ccs, [rgb] * len(ccs)))))
 
 if __name__ == '__main__':
 	highlight_countries('us ca mx br cn ru jp uk ie nl se no fr de es pt pl ro gr cz il eg in pk lk au mm th kh la'.split(' '))

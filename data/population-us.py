@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import glob
@@ -46,7 +46,7 @@ for line in open('popclockest.txt', 'r').readlines():
 Baseline = float(Pop[-1][1])
 
 for (year, pop) in Pop:
-	print("INSERT INTO population VALUES('us',%d,%d,%.5f);" \
-		% (year, pop, Baseline / pop))
+	print(("INSERT INTO population VALUES('us',%d,%d,%.5f);" \
+		% (year, pop, Baseline / pop)))
 print('COMMIT;')
 

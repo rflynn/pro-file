@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -16,18 +16,18 @@ dir = 'givenname-birthyear-us'
 # TODO: consolidate following blocks, shared in other places, into utility functions
 
 if os.path.exists(file):
-	print('-- %s exists' % (file))
+	print(('-- %s exists' % (file)))
 else:
-	import urllib
+	import urllib.request, urllib.parse, urllib.error
 	def reporthook(a,b,c): 
-    		print("% 3.1f%% of %d bytes\r" % \
-			(min(100, float(a * b) / c * 100), c)),
-    		sys.stdout.flush()
-     	print('-- %s ->  %s' % (url, file))
-     	urllib.urlretrieve(url, file, reporthook)
+		print(("% 3.1f%% of %d bytes\r" % \
+			(min(100, float(a * b) / c * 100), c)), end=' ')
+		sys.stdout.flush()
+	print(('-- %s ->  %s' % (url, file)))
+	urllib.request.urlretrieve(url, file, reporthook)
 
 if os.path.exists(dir):
-	print('-- %s exists' % (dir))
+	print(('-- %s exists' % (dir)))
 else:
 	import subprocess
 	print('/*')

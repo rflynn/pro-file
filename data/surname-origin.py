@@ -3059,12 +3059,12 @@ if __name__ == '__main__':
 		for (name,) in fetch_names():
 			e = ethnicity(name)
 			if not e:
-				print("('%s','')," % (name))
+				print(("('%s','')," % (name)))
 				err = True
 			else:
 				cnt += 1
-				print("%s -> %s" % (name, ','.join(uniq(e))))
-		print('cnt=%d' % (cnt))
+				print(("%s -> %s" % (name, ','.join(uniq(e)))))
+		print(('cnt=%d' % (cnt)))
 		return not err
 
 	def create_table(conn):
@@ -3086,7 +3086,7 @@ if __name__ == '__main__':
 		c = conn.cursor()
 		c.execute('BEGIN')
 		cnt = 0
-		for name,hs in SurnameDict.items():
+		for name,hs in list(SurnameDict.items()):
 			for h in hs:
 				#print('(name=%s)(n=%s)(hs=%s)(h=%s)' % (name,n,hs,h))
 				c.execute('INSERT INTO surname_origin VALUES(?,?)', (name,h))
@@ -3098,5 +3098,5 @@ if __name__ == '__main__':
 	assert test()
 	with sqlite3.connect('./names.db') as conn:
 		cnt = insert_surnames(conn)
-		print('imported', cnt, 'surname/origin records')
+		print(('imported', cnt, 'surname/origin records'))
 

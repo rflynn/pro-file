@@ -1,5 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# ex: set ts=4 noet:
 
 """
 Generate HTML/png name popularity report over time by integrating statistics.
@@ -21,7 +22,7 @@ def graph(name, p, Width=110, Height=50, BarWidthPx=2, BarSpacePx=1):
 		cr = cairo.Context(surface)
 		cr.set_source_rgba(0,0,0,1)
 		cr.select_font_face('Verdana')
-        	cr.set_font_size(8.0)
+		cr.set_font_size(8.0)
 		cnts = [cnt for year,cnt in p]
 		mi = stats.meani(cnts)
 		mval = cnts[mi]
@@ -36,10 +37,13 @@ def graph(name, p, Width=110, Height=50, BarWidthPx=2, BarSpacePx=1):
 				cr.set_source_rgba(0,0,0,1)
 			if i == mi:
 				cr.set_source_rgba(1,0,0,1)
+
+				# XXX: not sure about the indentation of these...
 				w, = cr.text_extents(str(year))[2:3]
-                		cr.move_to(max(0, x-w/2.), Height)
-                		cr.show_text(str(year))
-                		cr.stroke()
+				cr.move_to(max(0, x-w/2.), Height)
+				cr.show_text(str(year))
+
+				cr.stroke()
 			cr.rectangle(x, Height-h-7, BarWidthPx, h)
 			cr.fill()
 			cr.stroke()
@@ -66,7 +70,7 @@ def name_birth_totals(conn, name):
 		sum(n.total * p.factor1900 * lt.prob) as fcnt
 	from givenname_birthyear n
 	join population p on p.year = n.year
-       	join life_table_us lt on lt.year = n.year
+   	join life_table_us lt on lt.year = n.year
 	where name=?
 	group by name, n.year
 	order by n.year asc""", (name,))
@@ -101,11 +105,11 @@ limit 1000
 for name,_ in c:
 	sys.stderr.write(name + ' ')
 	(pct, pctrng) = graph(name, name_birth_totals(conn, name), CurrentYear-1900-1)
-	print("""
+	print(("""
 <div style="display:inline-block">
 	<div>%s <small>(%.1f%% &plusmn;15 yr) (&plusmn;%.1f yr @ 80%%)</small></div>
 	<img src="name-dob-chart/%s.png">
-</div>""" % (name, pct, pctrng / 2., name))
+</div>""" % (name, pct, pctrng / 2., name)))
 print("</body></html>")
 sys.stderr.write('\n')
 
