@@ -9,7 +9,7 @@ import stats # custom
 
 CurrentYear = time.localtime().tm_year
 
-""" 
+"""
 TODO: create a separate gender table and just pre-calculate everything, much faster
 """
 def gender(conn, name, cc='US'):
@@ -22,7 +22,7 @@ def gender(conn, name, cc='US'):
 		""", (name,))
 	g = dict(list(c.fetchall()))
 	total = float(sum(list(g.values())))
-	g2 = dict([(k, g[k]/total) for k in list(g.keys()]))
+	g2 = {k:g[k]/total for k in g.keys()};
 	# ensure both common genders present
 	for k in ('F','M'):
 		if not k in g2:
@@ -33,11 +33,11 @@ def gender(conn, name, cc='US'):
 def name_birth_totals(conn, name, cc='US'):
 	c = conn.cursor()
 	c.execute("""
-	select	n.year,
+	select n.year,
 		sum(n.total * p.factor1900 * lt.prob) as fcnt
 	from givenname_birthyear n
 	join population p on p.year = n.year
-       	join life_table_us lt on lt.year = n.year
+	join life_table_us lt on lt.year = n.year
 	where name=?
 	group by name, n.year""", (name,))
 	d = dict(c.fetchall())
@@ -76,11 +76,11 @@ def lookup(conn, givennames):
 		pct, span = 70, 20
 		plo,phi = birthspan_pct(conn, norm, pct)
 		(slo,shi),spct = birthspan(conn, norm, span)
- 		hints = givenname_origin.classify(norm)
+		hints = givenname_origin.classify(norm)
 		print('%-15s %3.0f%%%s %2.0f%%@%.0fyr=%d-%d %.0f%%=%d-%d %s' % \
 			(name, max(g.values())*100.,
-		 	'F' if g['F'] >= g['M'] else 'M', 
-		 	spct, span, slo, shi, pct, plo, phi, hints))
+			'F' if g['F'] >= g['M'] else 'M',
+			spct, span, slo, shi, pct, plo, phi, hints))
 
 def test(conn):
 	lookup(conn, 'Non-existent Ruth James Robin Ryan Britney Tyler Austin'.split(' '))
