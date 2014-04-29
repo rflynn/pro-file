@@ -46,7 +46,7 @@ def create_table(conn):
         pctwhite REAL NOT NULL,
         pctblack REAL NOT NULL,
         pctapi REAL NOT NULL,
-        pctaian REAL NOT NULL,
+        pctasian REAL NOT NULL,
         pct2race REAL NOT NULL,
         pcthispanic REAL NOT NULL
     );""")
@@ -63,7 +63,7 @@ def parse(conn, csvfilename):
     rd = csv.reader(open(csvfilename, 'r'))
     # hmmm python csv reader doesn't handle field title lines?
     next(rd) # discard header line
-    fields = ['name','rank','count','prop100k','cum_prop100k','pctwhite','pctblack','pctapi','pctaian','pct2prace','pcthispanic']
+    fields = ['name','rank','count','prop100k','cum_prop100k','pctwhite','pctblack','pctapi','pctasian','pct2prace','pcthispanic']
     create_table(conn)
     c = conn.cursor()
     c.execute('BEGIN TRANSACTION')
@@ -76,9 +76,9 @@ def parse(conn, csvfilename):
         d['eth'],d['ethpct'] = max(e,key=lambda x:x[1])
         d['eth'] = d['eth'][3:].upper()
         c.execute('INSERT INTO surname_ethnicity_us_2000' + \
-'(name,likely_eth,likely_pct,total,pctwhite,pctblack,pctapi,pctaian,pct2race,pcthispanic)VALUES(?,?,?,?,?,?,?,?,?,?)',
+'(name,likely_eth,likely_pct,total,pctwhite,pctblack,pctapi,pctasian,pct2race,pcthispanic)VALUES(?,?,?,?,?,?,?,?,?,?)',
             (d['name'], d['eth'], d['ethpct'], d['count'],
-             d['pctwhite'], d['pctblack'], d['pctapi'], d['pctaian'], d['pct2prace'], d['pcthispanic']))
+             d['pctwhite'], d['pctblack'], d['pctapi'], d['pctasian'], d['pct2prace'], d['pcthispanic']))
         cnt += 1
     #c.execute('COMMIT')
     c.close()
