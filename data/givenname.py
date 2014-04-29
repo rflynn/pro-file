@@ -77,13 +77,16 @@ def lookup(conn, givennames):
         plo,phi = birthspan_pct(conn, norm, pct)
         (slo,shi),spct = birthspan(conn, norm, span)
         hints = givenname_origin.classify(norm)
+        if g['F'] == 0. and g['M'] == 0. and spct == 0 and hints == []:
+            # name not found
+            sys.exit(1)
         print('%-15s %3.0f%%%s %2.0f%%@%.0fyr=%d-%d %.0f%%=%d-%d %s' % \
             (name, max(g.values())*100.,
             'F' if g['F'] >= g['M'] else 'M',
             spct, span, slo, shi, pct, plo, phi, hints))
 
 def test(conn):
-    lookup(conn, 'Non-existent Ruth James Robin Ryan Britney Tyler Austin'.split(' '))
+    lookup(conn, 'Ruth James Robin Ryan Britney Tyler Austin Non-existent'.split(' '))
 
 if __name__ == '__main__':
     import sys
