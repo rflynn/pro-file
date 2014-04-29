@@ -10,13 +10,16 @@ import sqlite3
 def ethnicity(conn, name, cc='us'):
     c = conn.cursor()
     c.execute("""
-        select likely_eth,likely_pct
-        from surname_ethnicity_us_2000
-        where name=?
+        select e.name,likely_pct
+        from surname_ethnicity_us_2000 s
+        join ethnicity_us_2000 e on e.id = s.likely_eth
+        where s.name=?
         """, (name,))
     eth = c.fetchone()
     if eth == None:
         eth = (None, 0)
+    else:
+        eth = (eth[0], eth[1] / 100.0)
     c.close()
     return eth
 
