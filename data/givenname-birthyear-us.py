@@ -16,49 +16,49 @@ dir = 'givenname-birthyear-us'
 # TODO: consolidate following blocks, shared in other places, into utility functions
 
 if os.path.exists(file):
-	print(('-- %s exists' % (file)))
+    print(('-- %s exists' % (file)))
 else:
-	import urllib.request, urllib.parse, urllib.error
-	def reporthook(a,b,c): 
-		print(("% 3.1f%% of %d bytes\r" % \
-			(min(100, float(a * b) / c * 100), c)), end=' ')
-		sys.stdout.flush()
-	print(('-- %s ->  %s' % (url, file)))
-	urllib.request.urlretrieve(url, file, reporthook)
+    import urllib.request, urllib.parse, urllib.error
+    def reporthook(a,b,c):
+        print(("% 3.1f%% of %d bytes\r" % \
+            (min(100, float(a * b) / c * 100), c)), end=' ')
+        sys.stdout.flush()
+    print(('-- %s ->  %s' % (url, file)))
+    urllib.request.urlretrieve(url, file, reporthook)
 
 if os.path.exists(dir):
-	print(('-- %s exists' % (dir)))
+    print(('-- %s exists' % (dir)))
 else:
-	import subprocess
-	print('/*')
-	sys.stdout.flush()
-	subprocess.call(['unzip', '-d', dir, file])
-	print('*/')
+    import subprocess
+    print('/*')
+    sys.stdout.flush()
+    subprocess.call(['unzip', '-d', dir, file])
+    print('*/')
 
 import glob, re
 import names
 
 def yob_generator():
-	files = glob.glob('./' + dir + '/yob*.txt')
-	for filename in files:
-		year = re.search('yob(\d+)\.txt', filename).group(1)
-		if int(year) >= 1900:
-			for line in open(filename, 'r'):
-				(name,gender,total) = line.strip().split(",")
-				norm = names.normalize(name)
-				yield (year, norm, gender, total)
+    files = glob.glob('./' + dir + '/yob*.txt')
+    for filename in files:
+        year = re.search('yob(\d+)\.txt', filename).group(1)
+        if int(year) >= 1900:
+            for line in open(filename, 'r'):
+                (name,gender,total) = line.strip().split(",")
+                norm = names.normalize(name)
+                yield (year, norm, gender, total)
 
 import sqlite3
 
 with sqlite3.connect('./names.sqlite3') as conn:
-	c = conn.cursor()
-	c.executescript("""
+    c = conn.cursor()
+    c.executescript("""
 DROP TABLE IF EXISTS givenname_birthyear;
 CREATE TABLE givenname_birthyear (
-	year int not null,
-	name text not null,
-	gender text not null,
-	total int not null
+    year int not null,
+    name text not null,
+    gender text not null,
+    total int not null
 );
 
 -- ugly pragmas to speed large insertion
@@ -66,12 +66,12 @@ PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA journal_mode = OFF;
 """)
-	print('-- inserting yob records...')
-	c.executemany('INSERT INTO givenname_birthyear VALUES(?,?,?,?)', yob_generator())
-	print('-- creating index...')
-	c.executescript("""
+    print('-- inserting yob records...')
+    c.executemany('INSERT INTO givenname_birthyear VALUES(?,?,?,?)', yob_generator())
+    print('-- creating index...')
+    c.executescript("""
 CREATE INDEX idx_name ON givenname_birthyear (name);
 PRAGMA synchronous = DEFAULT;
 PRAGMA temp_store = NORMAL;""")
-	c.close()
+    c.close()
 

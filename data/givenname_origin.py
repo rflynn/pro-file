@@ -432,51 +432,51 @@ GivenNameDict = {}
 Nicknames = {}
 
 def build_names():
-	cnt = 0
-	for name,hints,nicknames in GivenNames:
-		if type(name) != tuple:
-			name = (name,)
-		name = tuple([names.normalize(n) for n in name])
-		if type(hints) != tuple:
-			hints = (hints,)
-		for n in name:
-			for h in hints:
-				if not hint.is_hint(h):
-					print((name,h,' is not a hint'))
-				else:
-					cnt += 1
-				if n in GivenNameDict:
-					GivenNameDict[n].append(h)
-				else:
-					GivenNameDict[n] = [h]
-		if type(nicknames) != tuple:
-			nicknames = (nicknames,)
-		for nick in nicknames:
-			nick = names.normalize(nick)
-			if nick in Nicknames:
-				Nicknames[nick].append(list(name))
-			else:
-				Nicknames[nick] = list(name)
-	return cnt
+    cnt = 0
+    for name,hints,nicknames in GivenNames:
+        if type(name) != tuple:
+            name = (name,)
+        name = tuple([names.normalize(n) for n in name])
+        if type(hints) != tuple:
+            hints = (hints,)
+        for n in name:
+            for h in hints:
+                if not hint.is_hint(h):
+                    print((name,h,' is not a hint'))
+                else:
+                    cnt += 1
+                if n in GivenNameDict:
+                    GivenNameDict[n].append(h)
+                else:
+                    GivenNameDict[n] = [h]
+        if type(nicknames) != tuple:
+            nicknames = (nicknames,)
+        for nick in nicknames:
+            nick = names.normalize(nick)
+            if nick in Nicknames:
+                Nicknames[nick].append(list(name))
+            else:
+                Nicknames[nick] = list(name)
+    return cnt
 
 build_names()
 
 def classify(name):
-	name = names.normalize(name)
-	# get list of all names to look up
-	name = [name] + (Nicknames[name] if name in Nicknames else [])
-	# get list of list of hints
-	hint = [GivenNameDict[n] if n in GivenNameDict else [] for n in name]
-	# merge lists
-	hint = list(itertools.chain(*hint))
-	# unique-ify list FIXME: no good; order matters
-	#hint = list(set(hint))
-	return hint
+    name = names.normalize(name)
+    # get list of all names to look up
+    name = [name] + (Nicknames[name] if name in Nicknames else [])
+    # get list of list of hints
+    hint = [GivenNameDict[n] if n in GivenNameDict else [] for n in name]
+    # merge lists
+    hint = list(itertools.chain(*hint))
+    # unique-ify list FIXME: no good; order matters
+    #hint = list(set(hint))
+    return hint
 
 if __name__ == '__main__':
 
-	def test():
-		assert classify('Bob') == classify('Robert')
+    def test():
+        assert classify('Bob') == classify('Robert')
 
-	test()
+    test()
 

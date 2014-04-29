@@ -8,9 +8,9 @@ others yield all sorts of things.
 
 Notes:
 
-	Most Indonesians do not use family last name.
-		Javanese do not usually have family names or surnames.
-		Many have just a single name. For example, 'Sukarno' or 'Suharto'.
+    Most Indonesians do not use family last name.
+        Javanese do not usually have family names or surnames.
+        Many have just a single name. For example, 'Sukarno' or 'Suharto'.
 """
 
 import hint
@@ -20,7 +20,7 @@ SurNames = (
 
 # Indian names by state and language
 # http://en.wikipedia.org/wiki/Indian_name
-# State(s)	Language(s) Spoken	Last Names
+# State(s)    Language(s) Spoken    Last Names
 (('ACHARYA','BARUA','BARUAH','BAROOAH','BAROOVA','BARTHAKUR','BEZBARUAH','BHATTACHARYA','BUJARBARUA','BORKOTOKY','GOSWAMI','KOTOKY','PUJARI','BORPUZARI','PANDIT','PHOOKAN','PHUKAN','SARMA/SARMAH/SHARMA','SIDDHANT','THAKORE'), ('STATE.IN.ASSAM','LANG.ASSAMESE','CASTE.IN.BRAHMIN')),
 (('BORUAH','BOROOAH','BARMAN','BHUYAN','BARBHUYAN','BORO','BORA','BORAH','BEZBORA','BORBORUAH','BORBORA','BORDOLOI','BORGOHAIN','BORKAKOTI','BORPATRAGOHAIN','BURAGOHAIN','CHAKRABORTY1,CHANGMAI','CHALIHA','CHETIA','CHOUDHURI','DAS','DEKA','DHEKIAL','GOGOI','GOHAIN','HAZARIKA','KAKATI','KAKOTI','KALITA','KONWAR','MEDHI','RONGHANG','TERANG','TERON','HMAR'), ('STATE.IN.ASSAM','LANG.ASSAMESE')),
 (('SAMARLA','VANGAVEETI','PARITALA','KONIDELA','NIMMAKAYALA','DAGGUBATI','ATLURI','BARLAPUDI','VOKSHANI','CHEVURI','RAVURU','SIRUGUDI','CHANDAMALLA','MAMUDURI','KODHATI','JAKKALA','PILLARISHETTY','APPANI','GAYAM','JASTI','VEMULAPALLI','ANUMULA','ASURI','NALLANCHAKRAVARTHULA','ALAPARTHI','GUNTI','DANABOYINA','GADDE','PAILA ','ETHROUTHU','GURRLA','BOINI','ANKEM','KARNATI','KALLURI','MEDAM','GINJUPALLI','KAVURI','KOTLA','KONDRAGUNTA','THUPALLI','RAAVI','MANDAVA','CHIGULURI','MUKKAMALA','MUSUNURI','GURRAM','VANGALA','YARLAGADDA','MADDALA','ANANTANENI','PONNA','GOLLAPINNI','MUMMIDI','ANUMOLU','BULUSU','NALLURU','BHAGAVATULA','CHAGANTI','CHAPARALA','CHERUKURI,GARUDADRI','MULLAPUDI','GOLLAPUDI','TANIKELLA','KOVELAMUDI','SRIPADA','VEMPATI','NUTULAPATI','NOMULA','DAVULURI','VEMURI','ALLU','ALLURI','TUNUGUNTLA','THANNEERU','LAKAMALLA','DAMACHERLA','THALARI','MARRI','PATI','AKULA','BANOTH','MEKA','RAMAVATH','CHINTHAMALLA','MUNNANGI','MAMIDALA','MANDALOJU','SREEGIRI','SRISHTI','VUNDAVALLI','VANAPALLI','VARRE','RAGAMPUDI','MUTYALA','PINNAMANENI','PENDYALA','PANUGANTI','PONNALA','POLISETTY','GALI','CHEBROLU','NIDUMOLU','GUNDAPANENI','MALLADI','ACHANTA','YELLAPRAGADA','AKKINENI','ATLURI','GANDHAMANENI','BELLAMKONDA','KAKUMANI','MADANU','GUNDA','CHARUGUNDLA','TULABANDU','NANDAMURI','VAKALAPUDI','THOTA','EGURI','PASALA','SHEIKH','MOHAMMED','REBBAPRAGADA','CHAGANTIPATI','GORTHI','METTA','NARA','SOMAROTHU','SAJJA','GADDAM','YANDAMURI','DEVINENI','KUNAPAREDDY','DHEPALLI'), ('STATE.IN.ANDHRA PRADESH','LANG.TELUGU')),
@@ -2924,179 +2924,179 @@ SurnameDict = {}
 import types
 
 def build_names():
-	cnt = 0
-	for name,hint in SurNames:
-		#print('name=', name)
-		if type(name) != tuple:
-			name = (name,)
-		if type(hint) != tuple:
-			hint = (hint,)
-		for n in name:
-			n = names.normalize(n)
-			for h in hint:
-				cnt += 1
-				if n in SurnameDict:
-					SurnameDict[n].append(h)
-				else:
-					SurnameDict[n] = [h]
-				#print('%s:%s' % (n,h)),
-	return cnt
+    cnt = 0
+    for name,hint in SurNames:
+        #print('name=', name)
+        if type(name) != tuple:
+            name = (name,)
+        if type(hint) != tuple:
+            hint = (hint,)
+        for n in name:
+            n = names.normalize(n)
+            for h in hint:
+                cnt += 1
+                if n in SurnameDict:
+                    SurnameDict[n].append(h)
+                else:
+                    SurnameDict[n] = [h]
+                #print('%s:%s' % (n,h)),
+    return cnt
 
 import re
 
 def spanish(n):
-	# -ez|az|is, or -oz (Spanish)
-	if re.search('(EZ|AZ|IS|OZ)$', n):
-		return 'suffix'
-	return None
+    # -ez|az|is, or -oz (Spanish)
+    if re.search('(EZ|AZ|IS|OZ)$', n):
+        return 'suffix'
+    return None
 
 def portugese(n):
-	# -es|as|is, or -os (Portuguese)
-	if re.search('(ES|AS|IS|OS)$', n):
-		return 'suffix'
-	return None
+    # -es|as|is, or -os (Portuguese)
+    if re.search('(ES|AS|IS|OS)$', n):
+        return 'suffix'
+    return None
 
 def french(n):
-	if re.search('EAU$', n):
-		return 'suffix'
-	if re.search('^(DE|FITZ)', n):
-		return 'prefix'
-	return None
+    if re.search('EAU$', n):
+        return 'suffix'
+    if re.search('^(DE|FITZ)', n):
+        return 'prefix'
+    return None
 
 def german(n):
-	if re.search('(ER|HAUER|MACHER)$', n):
-		return 'suffix'
-	if re.search('^(VON|AN)', n):
-		return 'prefix'
-	if re.search('(BERG|BRUCK|BURG|FURT|HOLZ|RODE|WALD|HEIM|DORF)$', n):
-		return 'suffix'
-	return None
+    if re.search('(ER|HAUER|MACHER)$', n):
+        return 'suffix'
+    if re.search('^(VON|AN)', n):
+        return 'prefix'
+    if re.search('(BERG|BRUCK|BURG|FURT|HOLZ|RODE|WALD|HEIM|DORF)$', n):
+        return 'suffix'
+    return None
 
 def irish(n):
-	# Patronymic Surnames Suffix mean "son of", Mac, Mc - son of, O' - grandson of
-	if re.search("^(O'|MC|BALLY)", n):
-		return 'prefix'
-	# Geographical Surnames Suffix Derived from nearby locations. Bally– (town), –more (big), or –beg (small)
-	if re.search('(MORE|BEG)$', n):
-		return 'suffix'
-	return None
+    # Patronymic Surnames Suffix mean "son of", Mac, Mc - son of, O' - grandson of
+    if re.search("^(O'|MC|BALLY)", n):
+        return 'prefix'
+    # Geographical Surnames Suffix Derived from nearby locations. Bally– (town), –more (big), or –beg (small)
+    if re.search('(MORE|BEG)$', n):
+        return 'suffix'
+    return None
 
 def italian(n):
-	if re.search("^(D['EI])", n):
-		return 'prefix'
-	return None
+    if re.search("^(D['EI])", n):
+        return 'prefix'
+    return None
 
 def scottish(n):
-	if re.search('^MAC', n):
-		return 'prefix'
-	return None
+    if re.search('^MAC', n):
+        return 'prefix'
+    return None
 
 def sri_lankan(n):
-	if re.search('SINGHE$', n):
-		return 'suffix'
-	return None
+    if re.search('SINGHE$', n):
+        return 'suffix'
+    return None
 
 def polish(n):
-	# icz|wicz|owicz|ewicz, and -ycz. These endings usually mean 'son of'.
-	if re.search('(([EO]W?I|Y)CZ)$', n):
-		return 'suffix'
-	# Other suffixes like -czak|czyk|iak|ak|ik, and -yk
-	if re.search('([SŚ]|C|DZ|K[IA])$', n):
-		return 'suffix'
-	if re.search('([AEIUY]K|K[AO])$', n):
-		return 'suffix'
-	return None
+    # icz|wicz|owicz|ewicz, and -ycz. These endings usually mean 'son of'.
+    if re.search('(([EO]W?I|Y)CZ)$', n):
+        return 'suffix'
+    # Other suffixes like -czak|czyk|iak|ak|ik, and -yk
+    if re.search('([SŚ]|C|DZ|K[IA])$', n):
+        return 'suffix'
+    if re.search('([AEIUY]K|K[AO])$', n):
+        return 'suffix'
+    return None
 
 def jewish(n):
-	if re.search('^(?:AARON|ABRAM|ADEL|ALT|BERG|BERK|BLOCK|BLOOM|BLUM|BROOK|BROWN|CORN|DERSH|DUCH|EDEL|EHREN|EISEN|FEI|FEIN|FELD|FIER|FINE|FINK|FIRE|FISH|FRANK|FREE|FRIED|GOLD|GOLDEN|GREEN|GROSS|GUT|HALPER|HEITZ|HIRSH|KAPL|KIRSH|KLEIN|LEV|LEWIN|LICHT|LIEBER|LOW|MANDEL|MENDEL|NUS|PEARL|PERL|RABIN|ROSE|ROSEN|ROTH|RUBEN|RUBIN|SCHWARTZ|SCHWARZ|SEGAL|SELIG|SILVER|SPIEL|SPRING|STEIN|STERN|WASSER|WEIN|WEIS|WEISS|WEITZ|WEIZ|WISE|WOLF|ZAHL|ZIMMER|ZUCKER)', n):
-		return 'prefix'
-	if re.search('(?:BAUM|BERG|FELD|HEIM|ITZ|MAN|MANN|HEIM|STEIN|STONE|THAL|WITZ)$', n):
-		return 'suffix'
-	return None
+    if re.search('^(?:AARON|ABRAM|ADEL|ALT|BERG|BERK|BLOCK|BLOOM|BLUM|BROOK|BROWN|CORN|DERSH|DUCH|EDEL|EHREN|EISEN|FEI|FEIN|FELD|FIER|FINE|FINK|FIRE|FISH|FRANK|FREE|FRIED|GOLD|GOLDEN|GREEN|GROSS|GUT|HALPER|HEITZ|HIRSH|KAPL|KIRSH|KLEIN|LEV|LEWIN|LICHT|LIEBER|LOW|MANDEL|MENDEL|NUS|PEARL|PERL|RABIN|ROSE|ROSEN|ROTH|RUBEN|RUBIN|SCHWARTZ|SCHWARZ|SEGAL|SELIG|SILVER|SPIEL|SPRING|STEIN|STERN|WASSER|WEIN|WEIS|WEISS|WEITZ|WEIZ|WISE|WOLF|ZAHL|ZIMMER|ZUCKER)', n):
+        return 'prefix'
+    if re.search('(?:BAUM|BERG|FELD|HEIM|ITZ|MAN|MANN|HEIM|STEIN|STONE|THAL|WITZ)$', n):
+        return 'suffix'
+    return None
 
 def ethnicity(surname):
-	norm = names.normalize(surname)
-	try:
-		return SurnameDict[norm]
-	except KeyError:
-		return None
+    norm = names.normalize(surname)
+    try:
+        return SurnameDict[norm]
+    except KeyError:
+        return None
 
 import sys
 
 def fetch_names():
-	names = [(x,) for x in sys.argv[1:]]
-	names += [
-		('Lee',),
-		('Smith',),
-		('May',),
-		('Daniel',),
-		('Roman',),
-		('Agrawal',),
-		('Nguyễn',),
-		('Lin',),
-		('Johnson',),
-		('Washington',),
-	]
-	return names
+    names = [(x,) for x in sys.argv[1:]]
+    names += [
+        ('Lee',),
+        ('Smith',),
+        ('May',),
+        ('Daniel',),
+        ('Roman',),
+        ('Agrawal',),
+        ('Nguyễn',),
+        ('Lin',),
+        ('Johnson',),
+        ('Washington',),
+    ]
+    return names
 
 def sanity():
-	assert names.normalize('GARCÍA') == 'GARCIA'
+    assert names.normalize('GARCÍA') == 'GARCIA'
 
 # unique all items in a list
 def uniq(l):
-	return list(set(l))
+    return list(set(l))
 
 build_names()
 
 if __name__ == '__main__':
 
-	import sqlite3
+    import sqlite3
 
-	def test():
-		sanity()
-		cnt = 0
-		err = False
-		for (name,) in fetch_names():
-			e = ethnicity(name)
-			if not e:
-				print(("('%s','')," % (name)))
-				err = True
-			else:
-				cnt += 1
-				print(("%s -> %s" % (name, ','.join(uniq(e)))))
-		print(('cnt=%d' % (cnt)))
-		return not err
+    def test():
+        sanity()
+        cnt = 0
+        err = False
+        for (name,) in fetch_names():
+            e = ethnicity(name)
+            if not e:
+                print(("('%s','')," % (name)))
+                err = True
+            else:
+                cnt += 1
+                print(("%s -> %s" % (name, ','.join(uniq(e)))))
+        print(('cnt=%d' % (cnt)))
+        return not err
 
-	def create_table(conn):
-		c = conn.cursor()
-		c.executescript("""
-		DROP TABLE IF EXISTS surname_origin;
-		CREATE TABLE surname_origin (
-			name TEXT NOT NULL,
-			hint TEXT NOT NULL
-		);
-		CREATE INDEX idx_surname_origin_name ON surname_origin(name);
-		""")
-		c.close()
+    def create_table(conn):
+        c = conn.cursor()
+        c.executescript("""
+        DROP TABLE IF EXISTS surname_origin;
+        CREATE TABLE surname_origin (
+            name TEXT NOT NULL,
+            hint TEXT NOT NULL
+        );
+        CREATE INDEX idx_surname_origin_name ON surname_origin(name);
+        """)
+        c.close()
 
-	# TODO: really we should have a master surnames table and use
-	# foreign keys to reduce size and speed us up
-	def insert_surnames(conn):
-		create_table(conn)
-		c = conn.cursor()
-		c.execute('BEGIN')
-		cnt = 0
-		for name,hs in list(SurnameDict.items()):
-			for h in hs:
-				#print('(name=%s)(n=%s)(hs=%s)(h=%s)' % (name,n,hs,h))
-				c.execute('INSERT INTO surname_origin VALUES(?,?)', (name,h))
-				cnt += 1
-		#c.execute('COMMIT') # hmm why doesn't this work?
-		c.close()
-		return cnt
+    # TODO: really we should have a master surnames table and use
+    # foreign keys to reduce size and speed us up
+    def insert_surnames(conn):
+        create_table(conn)
+        c = conn.cursor()
+        c.execute('BEGIN')
+        cnt = 0
+        for name,hs in list(SurnameDict.items()):
+            for h in hs:
+                #print('(name=%s)(n=%s)(hs=%s)(h=%s)' % (name,n,hs,h))
+                c.execute('INSERT INTO surname_origin VALUES(?,?)', (name,h))
+                cnt += 1
+        #c.execute('COMMIT') # hmm why doesn't this work?
+        c.close()
+        return cnt
 
-	assert test()
-	with sqlite3.connect('./names.sqlite3') as conn:
-		cnt = insert_surnames(conn)
-		print(('imported', cnt, 'surname/origin records'))
+    assert test()
+    with sqlite3.connect('./names.sqlite3') as conn:
+        cnt = insert_surnames(conn)
+        print(('imported', cnt, 'surname/origin records'))
 
