@@ -3,7 +3,7 @@
 
 # generated files and reports
 doc/from-to-mapping.html
-data/names.db
+data/names.sqlite3
 data/names-dob.html
 data/map/world-small-out.svg
 

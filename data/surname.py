@@ -51,7 +51,7 @@ def test(conn):
 
 if __name__ == '__main__':
 	import sys
-	with sqlite3.connect('./names.db') as conn:
+	with sqlite3.connect('./names.sqlite3') as conn:
 		if sys.argv[1:] != []:
 			lookup(conn, sys.argv[1:])
 		else:

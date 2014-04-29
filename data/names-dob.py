@@ -83,7 +83,7 @@ def name_birth_totals(conn, name):
 	return fill
 
 CurrentYear = time.localtime().tm_year
-conn = sqlite3.connect('./names.db')
+conn = sqlite3.connect('./names.sqlite3')
 
 print("<html><body>")
 sys.stderr.write('top names...\n')

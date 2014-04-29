@@ -50,7 +50,7 @@ def yob_generator():
 
 import sqlite3
 
-with sqlite3.connect('./names.db') as conn:
+with sqlite3.connect('./names.sqlite3') as conn:
 	c = conn.cursor()
 	c.executescript("""
 DROP TABLE IF EXISTS givenname_birthyear;

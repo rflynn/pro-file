@@ -94,7 +94,7 @@ if __name__ == '__main__':
 	download(Url, Filename)
 	extract(Filename, Extractdir)
 
-	with sqlite3.connect('./names.db') as conn:
+	with sqlite3.connect('./names.sqlite3') as conn:
 		cnt = parse(conn, CsvFilename)
 		print(('imported', cnt, 'surname/ethnicity records'))
 

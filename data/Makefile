@@ -1,6 +1,6 @@
 
 SQLITE = sqlite3
-DB = names.db
+DB = names.sqlite3
 
 all: db report
 

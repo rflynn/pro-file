@@ -3096,7 +3096,7 @@ if __name__ == '__main__':
 		return cnt
 
 	assert test()
-	with sqlite3.connect('./names.db') as conn:
+	with sqlite3.connect('./names.sqlite3') as conn:
 		cnt = insert_surnames(conn)
 		print(('imported', cnt, 'surname/origin records'))
 
