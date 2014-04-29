@@ -43,13 +43,13 @@ def create_table(conn):
         code        TEXT    NOT NULL UNIQUE,
         name        TEXT    NOT NULL UNIQUE
     );
-    INSERT INTO ethnicity_us_2000 (code, name)
-              SELECT 'W', 'White'
-        UNION SELECT 'B', 'Black'
-        UNION SELECT 'I', 'API'
-        UNION SELECT 'A', 'Asian'
-        UNION SELECT '2', '2 races'
-        UNION SELECT 'H', 'Hispanic'
+    INSERT INTO ethnicity_us_2000 (id, code, name)
+              SELECT 1, 'W', 'White'
+        UNION SELECT 2, 'B', 'Black'
+        UNION SELECT 3, 'I', 'API'
+        UNION SELECT 4, 'A', 'Asian'
+        UNION SELECT 5, '2', '2 races'
+        UNION SELECT 6, 'H', 'Hispanic'
         ;
     DROP TABLE IF EXISTS surname_ethnicity_us_2000;
     CREATE TABLE surname_ethnicity_us_2000 (
