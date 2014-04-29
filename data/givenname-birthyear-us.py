@@ -43,7 +43,7 @@ def yob_generator():
 	for filename in files:
 		year = re.search('yob(\d+)\.txt', filename).group(1)
 		if int(year) >= 1900:
-			for line in open(filename, 'r').readlines():
+			for line in open(filename, 'r'):
 				(name,gender,total) = line.strip().split(",")
 				norm = names.normalize(name)
 				yield (year, norm, gender, total)
