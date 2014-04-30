@@ -2,7 +2,7 @@
 SQLITE = sqlite3
 DB = names.sqlite3
 
-all: db report
+all: db summarize report
 
 db:
 	[ -e popclockest.txt ] || curl -O http://www.census.gov/population/estimates/nation/popclockest.txt
@@ -11,6 +11,10 @@ db:
 	./givenname-birthyear-us.py
 	./surname-origin.py
 	./surname-ethnicity-us.py
+
+summarize:
+	# summarize: calculate derived tables
+	eval $(SQLITE) $(DB) < givenname-gender-summary.sql
 
 report:
 	./names-dob.py > names-dob.html
