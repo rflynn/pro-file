@@ -79,14 +79,16 @@ def lookup(conn, givennames):
         hints = givenname_origin.classify(norm)
         if g['F'] == 0. and g['M'] == 0. and spct == 0 and hints == []:
             # name not found
-            sys.exit(1)
-        print('%-15s %3.0f%%%s %2.0f%%@%.0fyr=%d-%d %.0f%%=%d-%d %s' % \
-            (name, max(g.values())*100.,
-            'F' if g['F'] >= g['M'] else 'M',
-            spct, span, slo, shi, pct, plo, phi, hints))
+            print('%-15s %3.0f%%' %
+                (name, max(g.values())*100.))
+        else:
+            print('%-15s %3.0f%%%s %3.0f%%@%.0fyr=%d-%d %.0f%%=%d-%d %s' %
+                (name, max(g.values())*100.,
+                'F' if g['F'] >= g['M'] else 'M',
+                spct, span, slo, shi, pct, plo, phi, hints))
 
 def test(conn):
-    lookup(conn, 'Ruth James Robin Ryan Britney Tyler Austin Non-existent'.split(' '))
+    lookup(conn, 'Agnes Ruth James Robin Ryan Britney Tyler Austin Non-existent'.split(' '))
 
 if __name__ == '__main__':
     import sys
