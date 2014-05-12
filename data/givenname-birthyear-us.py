@@ -7,6 +7,7 @@ Download, extract, parse and generate SQL
 """
 
 import sys, os
+import zipfile
 
 url = 'http://www.ssa.gov/oact/babynames/names.zip'
 i = url.rfind('/')
@@ -29,11 +30,9 @@ else:
 if os.path.exists(dir):
     print(('-- %s exists' % (dir)))
 else:
-    import subprocess
-    print('/*')
-    sys.stdout.flush()
-    subprocess.call(['unzip', '-d', dir, file])
-    print('*/')
+    with zipfile.ZipFile(file) as zf:
+        zf.extractall(dir)
+        zf.close()
 
 import glob, re
 import names
