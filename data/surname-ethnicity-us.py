@@ -8,6 +8,7 @@ the ethnicity of common surnames
 
 import os, sys
 import sqlite3
+import zipfile
 
 # TODO: split these generalized functions into their own module
 # and consolidate smiliar calls in other files
@@ -26,13 +27,6 @@ def download(url, filename):
         urllib.request.urlretrieve(url, filename, reporthook)
     # TODO: check success of urlretrieve
     return True
-
-def extract(filename, destdir):
-    import subprocess
-    print('/*')
-    sys.stdout.flush()
-    subprocess.call(['unzip', '-d', destdir, '-u', filename])
-    print('*/')
 
 def create_table(conn):
     c = conn.cursor()
@@ -120,12 +114,14 @@ if __name__ == '__main__':
     Url = 'http://www.census.gov/genealogy/www/data/2000surnames/names.zip'
     Filename = 'surname-ethnicity-us-names-2000.zip'
     Extractdir = 'surname-ethnicity-us-names-2000/'
-    CsvFilename = Extractdir + 'app_c.csv'
+    CsvFilename = 'app_c.csv'
 
     download(Url, Filename)
-    extract(Filename, Extractdir)
+    with zipfile.ZipFile(Filename) as zf:
+        zf.extract(CsvFilename, path=Extractdir)
+        zf.close()
 
     with sqlite3.connect('./names.sqlite3') as conn:
-        cnt = parse(conn, CsvFilename)
+        cnt = parse(conn, Extractdir + CsvFilename)
         print(('imported', cnt, 'surname/ethnicity records'))
 

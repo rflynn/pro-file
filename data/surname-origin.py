@@ -3057,13 +3057,17 @@ if __name__ == '__main__':
         cnt = 0
         err = False
         for (name,) in fetch_names():
-            e = ethnicity(name)
-            if not e:
-                print(("('%s','')," % (name)))
-                err = True
-            else:
-                cnt += 1
-                print(("%s -> %s" % (name, ','.join(uniq(e)))))
+            try:
+                e = ethnicity(name)
+                if not e:
+                    print(("('%s','')," % (name)))
+                    err = True
+                else:
+                    cnt += 1
+                    print(("%s -> %s" % (name, ','.join(uniq(e)))))
+            except UnicodeEncodeError as exc:
+                print('test error: {}!'.format(exc))
+                pass
         print(('cnt=%d' % (cnt)))
         return not err
 
