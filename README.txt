@@ -17,7 +17,7 @@ and other data and and then cross-reference an incomplete set of information and
 return a set of statistical speculations.
 
 Requirements:
-	apt-get install sqlite3 unzip python python3
+	apt-get install sqlite3 python3
 
 Use:
 
