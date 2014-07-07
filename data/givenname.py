@@ -20,9 +20,9 @@ def gender(conn, name, cc='US'):
         where name=?
         group by name,gender
         """, (name,))
-    g = dict(list(c.fetchall()))
-    total = float(sum(list(g.values())))
-    g2 = {k:g[k]/total for k in g.keys()};
+    g = dict(c.fetchall())
+    total = float(sum(g.values()))
+    g2 = {k:g[k]/total for k in g}
     # ensure both common genders present
     for k in ('F','M'):
         if not k in g2:
