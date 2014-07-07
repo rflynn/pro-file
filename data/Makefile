@@ -17,6 +17,7 @@ summarize:
 	eval $(SQLITE) $(DB) < givenname-gender-summary.sql
 
 report:
+	mkdir -p name-dob-chart
 	./names-dob.py > names-dob.html
 
 clean:
