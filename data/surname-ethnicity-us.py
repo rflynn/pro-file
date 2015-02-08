@@ -111,7 +111,7 @@ def parse(conn, csvfilename):
 
 if __name__ == '__main__':
 
-    Url = 'http://www.census.gov/genealogy/www/data/2000surnames/names.zip'
+    Url = 'http://www2.census.gov/topics/genealogy/2000surnames/names.zip'
     Filename = 'surname-ethnicity-us-names-2000.zip'
     Extractdir = 'surname-ethnicity-us-names-2000/'
     CsvFilename = 'app_c.csv'
